@@ -1,2 +1,2 @@
 # CIGE
-CIGE - Codeigniter Gestão Digital
+CIGE - PHP Codeigniter Gestão Digital
