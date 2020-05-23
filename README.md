@@ -1,2 +1,2 @@
-# cige
+# CIGE
 CIGE - Codeigniter Gestão Digital
