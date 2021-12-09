@@ -1,0 +1,54 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block content %}
+<div id="header" class="col-md-12">
+  <h2 class="title">{% trans "Bulk Upload Voters &mdash; Confirm" %}</h2>
+  <h3 class="title">{{election.name}}</h3>
+<p>
+{% blocktrans %}
+You have uploaded a file of voters. The first few rows of this file are:
+{% endblocktrans %}
+</p>
+
+<table class="table table-striped">
+<tr><th>{% trans "Voter Login" %}</th><th>{% trans "Email Address" %}</th><th>{% trans "Name" %}</th></tr>
+{% for v in voters %}
+<tr><td>{{v.voter_id}}</td><td>{{v.email}}</td><td>{{v.name}}</td></tr>
+{% endfor %}
+</table>
+
+{% if problems %}
+<p style="font-size: 1.5em;color: red">
+{% trans "HOLD ON:" %}<br />
+</p>
+<p>
+{% for problem in problems %}
+- {{problem}}<br />
+{% endfor %}
+</p>
+<br />
+
+<a href="{% url "election@voters@upload-cancel" election.uuid %}">{% trans "never mind, upload a different file" %}</a>
+</p>
+</div>
+<div class="col-md-12">
+{% else %}
+
+<form method="post" role="form" class="form" action="" id="upload_form">
+ <input type="hidden" name="confirm_p" value="1" />
+<div class="form-group">
+  <label for="upload">{% trans "Does this look right to you?" %}</label>
+ </div>
+ <div class="form-group">
+   <input id="upload" class="btn btn-primary" type="submit" value="{% trans "Yes, let's go" %}" />
+</div>
+</form>
+<div class="form-group">
+<a class="btn btn-danger" href="{% url "election@voters@upload-cancel" election.uuid %}">{% trans "no, let me upload a different file" %}</a>
+ <a class="btn btn-danger" href="{% url "election@view" election.uuid %}"> {% trans "back to election" %}</a>
+</div>
+</div>
+
+{% endif %}
+
+{% endblock %}

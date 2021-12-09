@@ -1,0 +1,35 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block content %}
+<div id="header">
+  <h2 class="title">{% trans "Register" %}</h2>
+<h3 class="title">{{ election.name }}</h3>
+</div>
+{% if user %}
+<p>
+{% blocktrans %}
+    You are currently logged in as {{user.user_id}} [{{user.user_type}}]
+{% endblocktrans %}
+</p>
+{% if voter %}
+<p>
+{% blocktrans %}
+    You are currently registered for this election.
+{% endblocktrans %}
+</p>
+{% else %}
+<p>
+{% blocktrans %}
+    You are <em>not</em> registered for this election.
+{% endblocktrans %}
+</p>
+
+<form method="post" action="{% url "election@register" election.uuid %}">
+<input type="submit" value="{% trans "register!" %}"/>
+</form>
+{% endif %}
+
+{% else %}
+{% endif %}
+
+{% endblock %}

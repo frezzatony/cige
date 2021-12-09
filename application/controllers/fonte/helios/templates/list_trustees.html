@@ -1,0 +1,106 @@
+{% extends "helios/templates/cryptobase.html" %}
+{% load i18n %}
+{% block title %}{% trans "Trustees for" %} {{election.name}}{% endblock %}
+
+{% block content %}
+  <h3 class="title">{% trans "Trustees" %} <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">{% trans "back to election" %}</a>]</span></h3>
+  <h3 class="title">{{election.name}}</h3>
+<p>
+<br>
+{% if admin_p %}
+{% blocktrans %}
+    Trustees are responsible for decrypting the election result.<br />
+    Each trustee generates a keypair and submits the public portion to Helios.<br />
+    When it's time to decrypt, each trustee needs to provide his secret key.
+{% endblocktrans %}
+</p>
+
+{% if not election.frozen_at %}
+
+<p>
+{% if election.has_helios_trustee %}
+{% blocktrans %}
+  Helios is automatically your first trustee and will handle its keypair generation and decryption automatically.<br />
+  You may add additional trustees if you want, and you can even remove the Helios trustee.<br />
+  However, we recommend you do this only if you have a solid understanding of the trustee's role.
+{% endblocktrans %}
+{% endif %}
+</p>
+
+
+<p>
+     <a class="btn btn-primary" id="add_trustee" href="{% url "election@trustees@new" election.uuid %}">{% trans "add a trustee" %}</a>
+</p>
+{% if not election.has_helios_trustee %}
+<p>
+    <a href="{% url "election@trustees@add-helios" election.uuid %}">{% trans "add Helios as a trustee" %}</a>
+</p>
+{% endif %}
+
+{% endif %}
+
+{% else %}
+
+{% trans "Below are listed the trustees for this election." %}
+{% endif %}
+
+{% if not trustees|length %}
+
+{% else %}
+<br><br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{% trans "Trustee" %}</th>
+      <th>{% trans "Public Key Fingerprint:" %}</th>
+      <th></th>
+      <th></th>
+   </tr>
+
+  </thead>
+  <tbody>
+{% for t in trustees %}
+  <tr>
+  <td>#{{forloop.counter}}: {{t.name}}</td>
+  <td>
+
+  {% if t.public_key_hash %}
+    <strong>{{t.public_key_hash}}</strong>
+  {% else %}
+  {% trans "No public key uploaded yet." %}
+  {% endif %}
+
+  </td>
+  <td>
+  {% if election.encrypted_tally %}
+  {% if t.decryption_factors %}
+  <span title="{% trans "tally recorded for this trustee." %}" class="glyphicon glyphicon-ok-sign"></span>
+  {% else %}
+  <span title="{% trans "waiting for this trustee's tally" %}" class="glyphicon glyphicon-info-sign"></span>
+  {% endif %}
+  {% endif %}
+  </td>
+  <td>
+
+  {% if admin_p %}
+    {% if t.secret_key %}
+      {% if not election.frozen_at %}
+          <a class="remove_helios_as_trustee" class="glyphicon glyphicon-remove" href="{% url "election@trustees@delete" election.uuid %}?uuid={{t.uuid}}">
+           <i title="{% trans "Remove trustee" %}" class="glyphicon glyphicon-remove"></i></a>
+      {% endif %}
+    {% else %}
+      {{t.email}}
+      {% if not election.frozen_at %}
+              <a class="remove_trustee" class="glyphicon glyphicon-remove" href="{% url "election@trustees@delete" election.uuid %}?uuid={{t.uuid}}"><i title="{% trans "Remove trustee" %}" class="glyphicon glyphicon-remove"></i></a>
+      {% endif %}
+               <a title="{% trans "send login" %}" class="glyphicon glyphicon-envelope send_trustee_url" href="{% url "election@trustee@send-url" election.uuid t.uuid %}"></a>
+    {% endif %}
+  {% endif %}
+  </td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+{% endblock %}

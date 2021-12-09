@@ -1,0 +1,32 @@
+
+.console{
+    width: 400px;    
+    position: fixed;
+	right: 0px;
+	bottom: 25px;
+	margin: 0;
+    border-bottom: 0;
+    z-index: 1000;
+    -webkit-box-shadow: -1px 11px 29px -6px rgba(0,0,0,0.16);
+    -moz-box-shadow: -1px 11px 29px -6px rgba(0,0,0,0.16);
+    box-shadow: -1px 11px 29px -6px rgba(0,0,0,0.16); 
+}
+
+.console .console-header{
+    background-color: #464646;
+    color: white;
+}
+.console .console-body{
+    font-family: Courier;
+    background-color: white;
+    height: 200px;
+    line-height: 0.9em;
+    margin-bottom: 2px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.console .console-body p{
+    margin-bottom: 4px;
+    font-size: 8pt;
+    background-color: rgb(245, 245, 245);
+}

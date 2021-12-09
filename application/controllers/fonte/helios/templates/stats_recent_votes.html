@@ -1,0 +1,28 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block title %}{% trans "Statistics" %}{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+	<h1>{% trans "Recent Votes" %}</h1>
+	{% trans "Last 24 hours" %}
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>{% trans "Election" %}</th>
+	      <th>{% trans "last cast vote" %}</th>
+	      <th>{% trans "recently cast votes" %}</th>
+	   </tr>
+	  </thead>
+	  <tbody>
+		{% for election in elections %}
+			<tr>
+			<td><b><a href="{% url "election@view" election.uuid %}">{{election.name}}</a></b></td>
+			<td>{{election.last_cast_vote|date:"d/m/Y H:i"}}</td>
+			<td>{{election.num_recent_cast_votes}}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

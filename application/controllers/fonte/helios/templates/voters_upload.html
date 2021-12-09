@@ -1,0 +1,47 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block content %}
+<div class="row">
+<div class="col-md-12">
+<form method="post" role="form" class="form-horizontal" action="" id="upload_form" enctype="multipart/form-data">
+   <div class="form-group">
+  <h2 class="title">{% trans "Bulk Upload Voters" %}</h2>
+  <h3 class="title">{{election.name}}</h3>
+ <pre>
+   {% trans "&lt;unique_id&gt;,&lt;email&gt,&lt;full name&gt;" %}
+</pre>
+
+<p>
+{% trans "For example:" %}
+  </p>
+  <pre>
+      benadida,ben@adida.net,Ben Adida
+      bobsmith,bob@acme.org,Bob Smith
+      ...
+  </pre> 
+
+  </div>
+  {% if error %}
+  <div style="color: red;">{{error}}</div>
+  {% endif %}
+    <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
+    <div class="form-group">
+    <input class="btn btn-primary" type="file" name="voters_file" value="{% trans "Browse" %}"/>
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="{% trans "go" %}" />
+        <a class="btn btn-danger" href="{% url "election@view" election.uuid %}">{% trans "back to election" %}</a>
+    </div>
+</form>
+
+<div id="processing">
+</div>
+
+<div id="done" style="display:none;">
+  {% trans "OK, done uploading." %}<br />
+  {% trans "You can now" %} <a href="./manage">{% trans "view the list of voters" %}</a>.
+</div>
+
+</div>
+</div>
+{% endblock %}

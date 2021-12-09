@@ -1,0 +1,20 @@
+{% extends 'server_ui/templates/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Confirm Vote" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Your Vote was Cast" %}</h1>
+
+<p>
+{% blocktrans %}
+    A vote was successfully cast for <b>{{voter.voter_id}}</b>, with vote fingerprint:
+{% endblocktrans %}
+    <br /><br />
+    <tt style="font-size: 2em;">{{voter.vote_hash}}</tt>
+</p>
+
+<p>
+    {% trans "Visit the" %} <a href="{% url "election@view" election.uuid %}">{% trans "election homepage" %}</a>.
+</p>
+
+{% endblock %}

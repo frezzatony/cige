@@ -1,0 +1,79 @@
+{% extends "helios/templates/cryptobase.html" %}
+{% load i18n %}
+{% block content %}
+<script>
+function reset() {
+    $('#processing').hide();
+    $('#result').html("");
+    $('#input').hide();
+    $('#loading').show();
+    BigInt.setup(function() {
+        $('#loading').hide();
+        $('#input').show();
+    });
+}
+
+$(document).ready(function() {
+    reset();
+});
+
+var PK_HASH = "{{trustee.public_key_hash}}";
+
+function check_sk(sk_value) {
+    $('#input').hide();
+    $('#processing').show();
+
+    try {
+      var secret_key = ElGamal.SecretKey.fromJSONObject(jQuery.secureEvalJSON(sk_value));
+
+      var pk_hash = b64_sha256(jQuery.toJSON(secret_key.pk));
+      var key_ok_p = (pk_hash == PK_HASH);
+    } catch (e) {
+      debugger;
+      var key_ok_p = false;
+    }
+    
+    $('#processing').hide();
+
+    var reset_link = "<br /><a class='btn btn-primary' href='javascript:reset();'>try again</a><br />";
+    if (key_ok_p) {
+      $('#result').html("<h3><span class='label label-success'>{% trans "your secret key matches!" %}</span></h3>");
+    } else {
+      $('#result').html("<h3><span class='label label-danger'>{% trans "OH OH, your key is bad." %}</span></h3>" + reset_link);
+    }
+}
+</script>
+  <h2 class="title">{% trans "Trustee" %} {{trustee.name}} &mdash; {% trans "Check Secret Key" %} <span style="font-size:0.7em;">[<a href="{% url "election@trustee" election_uuid=election.uuid trustee_uuid=trustee.uuid %}">{% trans "back to trustee home" %}</a>]</span></h2>
+  <h2 class="title">{{election.name}}</h2>
+
+<p>
+{% trans "Your public key fingerprint is:" %} <b>{{trustee.public_key_hash}}</b>
+</p>
+
+<div id="loading">
+{% trans "loading crypto functions..." %}
+</div>
+
+<div id="input" style="display:none;">
+<p>
+{% trans "To verify that you have the right secret key, paste it here:" %}
+<p>
+
+<form onsubmit="check_sk(this.secret_key.value); this.secret_key.value=''; return false;">
+<textarea name="secret_key" cols="60" rows ="5" wrap="soft" style="height: 25em;">
+</textarea>
+<br />
+<input class="btn btn-primary" type="submit" value="{% trans "check" %}"/>
+</form>
+</div>
+
+<div id="processing" style="display:none;">
+{% trans "checking your secret key..." %}
+</div>
+
+<div id="result">
+</div>
+
+
+<div id="applet_div"></div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block content %}
+{% if error %}
+<div style="color: red;">{{error}}</div>
+{% endif %}
+<br>
+<div class="panel panel-primary">
+    <div class="panel-heading">{% trans "Create a New Election" %}</div>
+    <div class="panel-body"> 
+      <form class="form-horizontal" role="form" action="" method="POST" id="create_election_form">
+	    <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
+      {% for field in election_form.visible_fields %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+         {{ field.errors }}
+          <label for="{{ field.label }}" class="col-sm-2 control-label">{{ field.label }}</label>
+          <div class="col-sm-10" class="form-control"> 
+          {{ field }}
+          <p class="help-block">{{ field.help_text }}</p>
+          </div>
+        </div> 
+      {% endfor %}
+      {% for hidden in election_form.hidden_fields %}
+          {{ hidden }}
+      {% endfor %}
+        <div class="pull-right">
+            <button id="next_button" type="submit" class="btn btn-primary">{% trans "Next" %}</button>
+        </div>
+      </form>
+      <br><br>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block content %}
+<div id="header">
+  <h2 class="title">{% trans "Election Not Yet Open" %}</h2>
+  <h3 class="title">{{election.name}}</h3>
+</div>
+
+  <p>
+  {% blocktrans %}
+      This election is not yet open. You probably got here from the Ballot Preview.
+  {% endblocktrans %}
+  </p>
+  
+  <p>
+      <a href="{% url "election@view" election.uuid %}">{% trans "back to the election" %}</a>
+  </p>
+{% endblock %}

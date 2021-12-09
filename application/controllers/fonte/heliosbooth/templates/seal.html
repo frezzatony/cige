@@ -1,0 +1,58 @@
+{#if $T.election_metadata.use_advanced_audit_features}
+<div style="float: right; background: lightyellow; margin-left: 20px; padding: 0px 10px 10px 10px; border: 1px solid #ddd; width:200px;">
+<h4><a onclick="$('#auditbody').slideToggle(250);" href="#">Auditar</a> <span style="font-size: 0.8em; color: #444">[opcional]</span></h4>
+<div id="auditbody" style="display:none;">
+<p>
+<!-- If you choose, you can audit your ballot and reveal how your choices were encrypted.-->
+Se você quiser, você pode auditar sua cédula e revelar como suas escolhas foram cifradas.
+</p>
+<p>
+<!--You will then be guided to re-encrypt your choices for final casting.-->
+Você será guiado para cifrar novamente suas escolhas para o depósito final da cédula.
+</p>
+<input type="button" value="Verificar Encriptação" onclick="BOOTH.audit_ballot();" class="pretty" />
+</p>
+</div>
+</div>
+{#/if}
+
+<h3>Revise a sua cédula.</h3>
+
+<div style="padding: 10px; margin-bottom: 10px; background-color: #eee; border: 1px #ddd solid; max-width: 340px;">
+{#foreach $T.questions as question}
+
+<b>Questão #{$T.question$index + 1}: {$T.question.short_name}</b><br>
+{#if $T.choices[$T.question$index].length == 0}
+<div style="margin-left: 15px;">&#x2610; <i>Nenhuma opção selecionada</i></div>
+{#/if}
+{#foreach $T.choices[$T.question$index] as choice}
+<div style="margin-left: 15px;">&#x2713; {$T.choice}</div>
+{#/for}
+{#if $T.choices[$T.question$index].length < $T.question.max}
+(Atenção: você selecionou {$T.choices[$T.question$index].length} candidatos(as), mas você poderia ter selecionado de {$T.question.min} até {$T.question.max}.
+ Se prefefir, volte e edite a cédula antes de depositar)
+{#/if}
+<br><br><a onclick="BOOTH.show_question({$T.question$index}); return false;" href="#">Editar resposta(s)</a>
+{#if !$T.question$last}<br><br>{#/if}
+{#/for}
+</div>
+
+<p>Antes de depositar na urna, você pode anotar seu rastreador de cédula:<br /><br />
+    <em><span style="font-size: 11pt;">{$T.encrypted_vote_hash}</span></em><br /><br />
+</p>
+<p>
+{% trans "Once you click "Submit", the unencrypted version of your ballot will be destroyed, and only the encrypted version will remain. The encrypted version will be submitted to the Helios server. %}</p>
+
+
+<button class="btn btn-primary" id="proceed_button" onclick="BOOTH.cast_ballot();">Depositar esta Cédula na Urna</button><br />
+<div id="loading_div"><img src="/static/loading.gif" id="proceed_loading_img" /></div>
+
+
+
+<form method="POST" action="{$T.cast_url}" id="send_ballot_form" class="prettyform">
+<input type="hidden" name="election_uuid" value="{$T.election_uuid}" />
+<input type="hidden" name="election_hash" value="{$T.election_hash}" />
+<textarea name="encrypted_vote" style="display: none;">
+{$T.encrypted_vote_json}
+</textarea>
+</form>

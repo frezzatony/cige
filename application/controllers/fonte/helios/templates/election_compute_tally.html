@@ -1,0 +1,37 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block title %}Compute Encryted Tally for {{election.name}}{% endblock %}
+
+{% block content %}
+  <h2 class="title">{% trans "Compute Tally for Election:" %} {{election.name}}</h2>
+
+<div id="instructions">
+{% if election.num_cast_votes %}
+<p>
+  {% trans "You are about to compute the encrypted tally for election" %} <b>{{election.name}}</b>.
+</p>
+
+<p>
+{% blocktrans %}
+    Once you do this, voters will no longer be able to cast a ballot.
+{% endblocktrans %}
+</p>
+
+<form id="begin_tally" method="post" action="" class="pretty">
+<input type="hidden" name="csrf_token" value="{{csrf_token}}" />
+    
+<input class="btn btn-primary" type="submit" value="{% trans "compute encrypted tally!" %}" />
+<button class="btn btn-danger" onclick="document.location='{% url "election@view" election.uuid %}'; return false;">{% trans "never mind" %}</button>
+</form>
+{% else %}
+<p>
+{% blocktrans %}
+No votes have been cast in this election. At least one vote must be cast before you compute the tally.<br /><br />
+{% endblocktrans %}
+<a href="{% url "election@view" election.uuid %}">{%trans "back to election" %}</a>
+</p>
+{% endif %}
+</div>
+
+<br /><br />
+{% endblock %}

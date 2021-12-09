@@ -1,0 +1,89 @@
+.bsgrid{
+     
+}
+
+.bsgrid .bsgrid-header-base{
+    padding-right: 8px;
+    border-bottom: 1px solid #7f8ca3;
+    background-color: #f8f9fa;
+}
+.bsgrid .bsgrid-header{
+    font-size: 0.8em;
+    border-bottom: 1px solid #7f8ca3;
+    color: #616C7E;
+    cursor: pointer;
+}
+
+.bsgrid .bsgrid-header .bsgrid-header-column:hover{
+    color: #7f8ca3;
+}
+
+.bsgrid .bsgrid-header-base{
+    
+}
+
+.bsgrid .bsgrid-body{
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    background: #FAFAFA;
+}
+
+.bsgrid .bsgrid-body .bsgrid-content-row{
+    font-size: 8pt;
+    
+    
+}
+
+.bsgrid .bsgrid-body .bsgrid-row-selected{
+    /*ABD7E6*/
+    background: #ABD7E6!important;
+    
+}
+.bsgrid .bsgrid-body .bsgrid-content-row:nth-child(even){
+  background: white;
+}
+.bsgrid .bsgrid-body .bsgrid-content-row:hover{
+    cursor: pointer;    
+    background-color: #F2F2F2;
+}
+
+.bsgrid .bsgrid-body .bsgrid-content-row .bsgrid-content-column:first-child{
+   border: 1px solid #DDD;
+   border-top: none; 
+}
+
+.bsgrid .bsgrid-body .bsgrid-content-row .bsgrid-content-column{
+   border: 1px solid #DDD;
+   border-top: none;
+   border-left: none;
+   height: 22px;
+   padding-right: 3px!important;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.bsgrid .bsgrid-body .bsgrid-content-row .bsgrid-content-column:last-child{
+   
+}
+
+
+/* width */
+.bsgrid .bsgrid-body::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+.bsgrid .bsgrid-body::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+.bsgrid .bsgrid-body::-webkit-scrollbar-thumb {
+  background: #CDCDCD; 
+}
+
+/* Handle on hover */
+.bsgrid .bsgrid-body::-webkit-scrollbar-thumb:hover {
+  background: #BCBCBC; 
+}

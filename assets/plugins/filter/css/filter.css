@@ -1,0 +1,89 @@
+div.filter-group{
+    margin: 10px 26px 10px 20px;
+    border: 1px solid #E74C3C;
+    font-size: 8pt;
+    background-color: rgba(255, 159, 148, 0.2);
+    
+}
+
+div.panel-body.filter-group{
+    border: none;
+    margin: 0;
+}
+div.filter-operator{
+    margin: 10px;
+    height: 36px;
+    /*border: dotted 1px #CCC;*/
+}
+
+div.filter-operator select{
+    margin: 2px 2px 2px 20px;
+    padding-left: 6px;
+    height: 30px;
+    font-size: 8pt;
+    
+}
+
+div.filter-group-heading{
+    padding: 6px 0;   
+}
+
+div.filter-group .btn-group ul li{
+    border-bottom: 1px dotted #CCC; 
+}
+div.filter-group .btn-group ul li.filter-menu-space{
+  margin-top: 10px;
+  margin-left: 10px; 
+  color: #333;
+  border: none;  
+  font-weight: 600;
+}
+div.filter-group .btn-group ul li.filter-menu-item{
+    cursor: pointer;
+    padding: 4px 0 4px 20px;
+}
+div.filter-group .btn-group ul li.filter-menu-item:hover{
+    text-decoration: underline;
+}
+
+div.filter-select-input{
+    margin: 10px 26px 10px 20px;
+    padding-top: 6px;
+    border: 1px dotted #BBB;
+    font-size: 8pt;
+    background-color: #eee;
+    
+}
+div.filter-select-input select{
+    padding-left: 6px;
+    height: 30px;
+    font-size: 8pt;
+    
+}
+div.filter-select-input  input[type="text"]{
+    padding-left: 16px;
+    height: 30px;
+    font-size: 8pt;
+    
+}
+div.filter-select-input input[type="checkbox"]{
+    margin-top: 6px;
+    margin-right: 4px;
+    font-size: 6pt;
+    
+}
+div.filter-select-input label span{
+    padding-top: 4px;
+    font-size: 8pt!important;    
+}
+
+div.filter-select-input .filter-value-input-and-text{
+    text-align: center;
+    padding-top: 4px!important;
+    font-size: 10pt!important;
+    font-weight: 500!important;
+}
+
+div.filter-row-inputs{
+   
+}

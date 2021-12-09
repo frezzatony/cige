@@ -1,0 +1,29 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block title %}{% trans "Release Result &mdash; {{election.name}}" %}{% endblock %}
+{% block content %}
+<div class="row">
+<div class="col-md-12">
+  <h2 class="title">{% trans "Release Result" %} <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">{% trans "cancel" %}</a>]</span></h2>
+<h2 class="title">{{election.name}}</h2>
+  <p>
+    {% trans "You are about to release the result for this election." %}
+  </p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+  <form class="form" method="POST" action="">
+    <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
+    <div class="checkbox">
+        <label><strong>{% trans "Send email to voters reporting release of result." %}</strong>
+            <input type="checkbox" name="send_email" value="send_email"/>
+        </label>
+    </div>
+    <div class="form-group">
+      <button id="release_result" class="btn btn-primary">{% trans "release result!" %}</button>
+  </div>
+  </form>
+</div>
+</div>
+{% endblock %}

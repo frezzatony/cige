@@ -1,0 +1,205 @@
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/assets/fonts/Open_Sans/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'ArialPrint';
+    src: url('/assets/fonts/Arial/ARIAL.TTF');
+}
+
+body{
+    font-family: 'Open Sans','opensans';
+    
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+    font-family: 'Open Sans','opensans';
+}
+
+td,
+th {
+	padding: 0;
+    vertical-align: top;
+}
+
+
+div.label{
+    color: #000;
+    font-weight: bold;
+    margin: 2px 0px 3px 0px;
+    padding: 0 0 0 3px;
+    font-size: 5pt;
+    text-transform: uppercase;
+    line-height: 6px;
+    width: 100%; 
+    float: left;
+    height: 7px;
+    display: block;        
+}
+div.value{
+    font-size: 7pt;
+    line-height: 9pt;
+    padding: 0 2px 0 3px;
+    display: block;
+    white-space: normal;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 1;
+}
+
+
+.bullet::before {
+    content: '';
+    position: absolute;
+    bottom: 7px;
+    left: -10px;
+    width: 3px;
+    height: 3px;
+    background-color: #000;
+    border-radius: 50%;
+}
+
+div.h2{
+    font-size: 8pt;
+    font-weight: bold;
+    padding: 0 2px 0 3px;
+}
+
+div.rodape{
+    position: absolute; 
+    bottom: 0; 
+    left: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+}
+
+div.assinatura{
+    text-align: center !important;
+    
+}
+div.assinatura .linha{
+    width: 270px; 
+    background-color: #DDD;
+    margin:auto;
+    height: 1px;
+}
+div.assinatura .nome{
+    color: #DDD;
+    margin: auto;
+    font-size: 8pt;
+}
+
+div.carimbo_sistema_A4{
+    display: none;
+    
+}
+.padding-2mm    {  padding: 2mm }
+.padding-4mm    {  padding: 4mm }
+.padding-5mm    {  padding: 5mm }
+.padding-6mm    {  padding: 6mm }
+.padding-8mm    {  padding: 8mm }
+.padding-10mm   {  padding: 10mm }
+.padding-12mm   {  padding: 12mm }
+.padding-14mm   {  padding: 14mm }
+.padding-15mm   {  padding: 15mm }
+.padding-16mm   {  padding: 16mm }
+.padding-18mm   {  padding: 18mm }
+.padding-20mm   {  padding: 20mm }
+.padding-22mm   {  padding: 22mm }
+.padding-24mm   {  padding: 24mm }
+.padding-25mm   {  padding: 25mm }
+.padding-26mm   {  padding: 26mm }
+.padding-28mm   {  padding: 28mm }
+.padding-30mm   {  padding: 30mm }
+.padding-32mm   {  padding: 32mm }
+.padding-34mm   {  padding: 34mm }
+.padding-36mm   {  padding: 36mm }
+.padding-38mm   {  padding: 38mm }
+.padding-40mm   {  padding: 40mm }
+.padding-42mm   {  padding: 42mm }
+.padding-44mm   {  padding: 44mm }
+.padding-46mm   {  padding: 46mm }
+.padding-48mm   {  padding: 48mm }
+.padding-50mm   {  padding: 50mm }
+.padding-52mm   {  padding: 52mm }
+.padding-54mm   {  padding: 54mm }
+.padding-56mm   {  padding: 56mm }
+.padding-58mm   {  padding: 58mm }
+.padding-60mm   {  padding: 60mm }
+.padding-62mm   {  padding: 62mm }
+.padding-64mm   {  padding: 64mm }
+.padding-66mm   {  padding: 66mm }
+.padding-68mm   {  padding: 68mm }
+.padding-70mm   {  padding: 70mm }
+.padding-72mm   {  padding: 72mm }
+.padding-74mm   {  padding: 74mm }
+.padding-76mm   {  padding: 76mm }
+.padding-78mm   {  padding: 78mm }
+.padding-80mm   {  padding: 80mm }
+.padding-82mm   {  padding: 82mm }
+.padding-84mm   {  padding: 84mm }
+.padding-86mm   {  padding: 86mm }
+.padding-88mm   {  padding: 88mm }
+.padding-90mm   {  padding: 90mm }
+.padding-92mm   {  padding: 92mm }
+.padding-94mm   {  padding: 94mm }
+.padding-96mm   {  padding: 96mm }
+.padding-98mm   {  padding: 98mm }
+
+.line-clmap-1   {    }
+.line-clmap-2   {   -webkit-line-clamp: 2!important; }
+.line-clmap-3   {   -webkit-line-clamp: 3!important; }
+.line-clmap-4   {   -webkit-line-clamp: 4!important; }
+
+.no-top {
+    margin-top: -1px;
+}
+
+
+
+@media print
+{    
+   
+    .bordered-no-print{
+        border: none !important;
+    }
+    .bordered{
+        border: 1px #030303 black!important;
+    }
+    .bg-gray{
+        background-color: #F0F0F0 !important;
+        background: #F0F0F0 !important;
+        background-image:none;
+    }
+    div.assinatura .linha{
+        background-color: #000;        
+    }
+    div.assinatura .nome{
+        color: black;
+    }
+    
+    div.carimbo_sistema_A4{
+        display: block;
+        position: absolute;
+        z-index: 180;
+        width: 240mm;
+        left: 196mm;
+        bottom: 30mm;
+        left: 206mm;
+        -moz-transform: rotate(270deg);  /* FF3.5+ */
+        -o-transform: rotate(270deg);  /* Opera 10.5 */
+        -webkit-transform: rotate(-90deg);  /* Saf3.1+, Chrome */
+        -moz-transform-origin: 0% 100%;
+        -o-transform-origin: 0% 100%;
+        -webkit-transform-origin: 0% 100%;
+        font-size: 5pt;
+        text-align: center;
+    }
+}
+

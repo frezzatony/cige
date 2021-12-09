@@ -1,0 +1,72 @@
+<form onsubmit="return false;" class="form-horizontal" role="form" id="answer_form">
+<input type="hidden" name="question_num" value="{$T.question_num}" />
+
+<p>
+<br />
+<span style="font-size: 1.2em;">
+<b>{$T.question.question}</b>
+</span>
+<br />
+
+<span style="font-size: 0.9em;">questão {$T.question_num + 1} de {$T.last_question_num + 1} &mdash;
+ você deve marcar
+{#if $T.question.max && $T.question.min == 0}
+ no máximo {$T.question.max}
+{#else}
+{#if $T.question.min && $T.question.min > 0}
+ no mínimo
+{#if $T.question.max}
+{$T.question.min} e no máximo {$T.question.max}
+{#else}
+{$T.question.min}
+{#/if}
+{#else}
+{#if $T.question.max}
+{#if $T.question.max > 1} até {#/if}{$T.question.max}
+{#else}
+quantas desejar
+{#/if}
+{#/if}
+{#/if}
+</span>
+</p>
+
+{#foreach $T.question.answers as answer}
+<div id="answer_label_{$T.question_num}_{$T.answer_ordering[$T.answer$index]}">
+    <input type="checkbox" class="ballot_answer" id="answer_{$T.question_num}_{$T.answer_ordering[$T.answer$index]}" name="answer_{$T.question_num}_{$T.answer_ordering[$T.answer$index]}" value="yes" onclick="BOOTH.click_checkbox({$T.question_num}, {$T.answer_ordering[$T.answer$index]}, this.checked);" />
+    <label class="answer" for="answer_{$T.question_num}_{$T.answer_ordering[$T.answer$index]}">
+        {$T.question.answers[$T.answer_ordering[$T.answer$index]]}
+
+        {#if $T.question.answer_urls && $T.question.answer_urls[$T.answer_ordering[$T.answer$index]] && $T.question.answer_urls[$T.answer_ordering[$T.answer$index]] != ""}
+           &nbsp;&nbsp;
+        <span style="font-size: 12pt;">
+        [<a target="_blank" href="{$T.question.answer_urls[$T.answer_ordering[$T.answer$index]]}" rel="noopener noreferrer">mais informações</a>]
+        </span>
+    {#/if}
+    </label>
+</div>
+{#/for}
+
+<div id="warning_box" style="color: green; text-align:center; font-size: 0.8em; padding-top:10px; padding-bottom: 10px; height:50px;">
+</div>
+
+
+{#if $T.show_reviewall}
+<div style="float: right;">
+<input type="button" class="btn btn-primary" onclick="BOOTH.validate_and_confirm({$T.question_num});" value="Próximo passo" />
+</div>
+{#/if}
+
+{#if $T.question_num != 0}
+<input type="button" class="btn btn-primary" onclick="BOOTH.previous({$T.question_num})" value="Questão Anterior" />
+&nbsp;
+{#/if}
+
+{#if $T.question_num < $T.last_question_num}
+<input type="button" class="btn btn-primary" onclick="BOOTH.next({$T.question_num})" value="Próxima Questão" />
+&nbsp;
+{#/if}
+
+<br clear="both" />
+
+</form>

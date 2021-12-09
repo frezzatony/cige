@@ -1,0 +1,100 @@
+{% extends TEMPLATE_BASE %}
+{% load i18n %}
+{% block title %}{% trans "Contact Voters for" %} {{election.name}}{% endblock %}
+{% block content %}
+<script>
+var voter_id = null;
+{% if voter %}
+voter_id = '{{voter.voter_id}}';
+{% endif %}
+</script>
+<div class="col-md-10">
+  <h2 class="title">{% trans "Contact Voters" %} <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">{% trans "back to election" %}</a>]</span></h2>
+  <h2 class="title">{{election.name}}</h2>
+
+{% if voter %}  
+  <p>
+
+  {% trans "You are sending this email to a specific user:" %} <b>{{voter.name}} ({{voter.voter_id}})</b>
+
+  </p>
+{% endif %}
+<br>
+
+<h3>{% trans "Choose the email type you want to send:" %}</h3>
+</div>
+<div class="col-md-6">
+<ul class="nav nav-pills nav-stacked">
+{% for template_option in templates %}
+{% if template_option.0 == template %}
+<li class="active"><a href="?template={{template_option.1}}">{{template_option.1}}</a></li>
+{% else %}
+<li><a href="?template={{template_option.0}}&voter_id={{voter.voter_login_id}}">{{template_option.1}}</a></li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+<div class="col-md-10">
+<pre style="margin:10px; border: 1px solid #888; padding:20px">
+{% trans "Subject:" %} {{default_subject}}
+
+{{default_body|safe}}
+</pre>
+</div>
+
+<div class="col-md-10">
+<p>
+{% trans "You may tweak the subject and add a custom message using the form below." %}
+</p>
+  <form class="form" role="form" action="" method="POST" id="email_form">
+    {{ email_form.non_field_errors }}
+    <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
+    <input type="hidden" name="template" value="{{template}}" />
+    <input type="hidden" name="voter_id" value="{{voter.voter_login_id}}" />
+    <div class="form-group {% if email_form.subject.errors %}has-error{% endif %}">
+    <label for="id_subject">{% if email_form.fields.subject.required %}*{% endif %}{% trans "Subject" %}</label>
+    <input type="text" name="subject" class="form-control" id="id_subject" placeholder="{% trans "Subject" %}">
+
+    {{email_form.subject.errors}}
+    </div>
+    <div class="form-group {% if email_form.body.errors %}has-error{% endif %}">
+    <label for="body">{% trans "Body" %}</label><br>
+    {% blocktrans %} What you type in here is what you get in the BODY tag on the template above {% endblocktrans %}
+    <textarea name="body" class="form-control" id="id_body" rows="4" cols="50" placeholder="{% trans "Body" %}">
+    </textarea>
+
+    {{email_form.body.errors}}
+    </div>
+
+    <div id="send_to" class="form-group {% if email_form.send_to.errors %}has-error{% endif %}">
+    <label for="send_to">{% trans "Send To" %}</label>
+    {{email_form.send_to}}
+    {{email_form.send_to.errors}}
+    </div>
+
+
+  <div class="form-group">
+   <button type="submit" id="send_button" class="btn btn-primary">{% trans "Send" %}</button>
+  </div>
+  </form>
+ </div>
+  <div id="processing">
+  </div>
+  
+  <div id="done" style="display:none;">
+    {% trans "Done, go" %} <a href="{% url "election@view" election.uuid %}">{% trans "back to election" %}</a>.
+  </div>
+
+  <div id="error" style="display:none;">
+  {% blocktrans %}
+    Error emailing participants. Check server settings, make sure there's an SMTP server.
+  {% endblocktrans %}
+  </div>
+<script language="javascript">
+{% if voter %}
+  $(document).ready(function() {
+    $('div#send_to').hide();
+  });
+{% endif %}
+</script>
+{% endblock %}

@@ -1,0 +1,50 @@
+
+.fth-header {
+    border: solid 1px;
+}
+
+div.table-filter .table-filter-body  table{
+    margin-bottom: 0px;
+    border: 1px solid rgb(204, 204, 204);
+}
+div.table-filter .table-filter-body  table thead tr{
+    background-color: white;
+    
+    
+}
+div.table-filter .table-filter-body  table thead tr th{
+    
+    
+    padding: 6px !important;
+    cursor: pointer;
+   
+}
+div.table-filter .table-filter-body  table thead tr th > .order-icon {
+   color: #6F6F6F;
+}
+div.table-filter .table-filter-body  table thead tr th .ordered-icon  {
+   color: #7A80DD;
+}
+div.table-filter .table-filter-body  table thead tr th:hover {
+    color: #CCC!important;
+     
+}
+
+div.table-filter .table-filter-body  table td{
+    height: 15px;
+    line-height: 12px;
+}
+
+div.table-filter .table-filter-body  table tbody tr td{
+    padding: 6px 3px 6px 9px;
+    font-size: 8pt;
+}
+
+div.table-filter .table-filter-body  table  tr:nth-child(even) {
+  background: #FAFAFA
+}
+
+div.table-filter .table-filter-body  table tbody tr:hover{
+    cursor: pointer;    
+    background-color: #F2F2F2;
+}

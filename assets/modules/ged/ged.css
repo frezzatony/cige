@@ -1,0 +1,117 @@
+
+.ged-toolbar{
+    border-bottom: 1px solid #CCC;
+}
+
+
+.ged-breacrumb{
+    font-family: 'Open Sans', 'Droid Arabic Naskh', Arial, sans-serif;
+    padding: 3px 0 0 0px;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    font-size: 11px;
+    overflow: hidden;
+    overflow-y: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    display: block;
+    max-height: 36px;
+}
+
+.ged-breacrumb::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.ged-breacrumb>li {
+	float: left;
+    max-width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ged-breacrumb>li+li::before {
+	padding-left: .1rem;
+	color: #818a91;
+	content: "/";
+}
+
+.ged-breacrumb>li a {
+	color: inherit;
+}
+
+.ged-breacrumb>.active {
+	color: #818a91;
+	font-weight: inherit;
+}
+
+.ged-files-body{
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    background-image: url("../../img/patterns/stripes-light.png");
+}
+
+.ged-app .bsgrid-body{
+    background-color: transparent!important;
+}
+
+.ged-app .bsgrid-content-row{
+    background-color: rgba(255,255,255,0.5)!important;
+}
+.ged-app .bsgrid-content-row:nth-child(even){
+    background-color: rgba(200,200,200,0.1)!important;
+}
+
+.ged-app .bsgrid-content-column{
+    height: 24px!important;    
+    font-size: 9pt;
+}
+
+div.bsgrid div.bsgrid-body div.bsgrid-row-selected{
+    /*ABD7E6*/
+    background: rgba(171,215,230,0.5)!important;
+    
+}
+div.bsgrid div.bsgrid-body div.drop{
+    /*ABD7E6*/
+    background: rgba(171,215,230,0.7)!important;
+    
+}
+.ged-app .ged-box-file{
+    cursor: pointer;
+    width: 90px;
+    margin: 2px 2px 2px 2px;
+    
+}
+
+
+.ged-app .ged-box-file.new{
+    background: rgba(127,191,63,0.3)!important;
+}
+
+.ged-app .ged-box-file.active{
+    background: rgba(171,215,230,0.3)!important;
+}
+
+.ged-app .ged-box-file.drop{
+    background: rgba(171,215,230,0.4)!important;
+}
+
+.ged-app .ged-box-file-name .file-name{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+    height: 30px;
+}
+
+.ged-app .bsgrid-content-column .file-name{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+}
